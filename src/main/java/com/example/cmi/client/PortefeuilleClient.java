@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "service-portefeuilles", url = "http://localhost:8086/api/portefeuilles")
+@FeignClient(name = "service-portefeuilles", url = "https://serviceportefeuilles-production.up.railway.app/api/portefeuilles")
 @Component
 public interface PortefeuilleClient {
     @GetMapping("/{id}")

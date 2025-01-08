@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Component
-@FeignClient(name = "service-paiement-multidevises", url = "http://localhost:8083/api/exchange")
+@FeignClient(name = "service-paiement-multidevises", url = "https://servicepaiementmultidevises-production.up.railway.app/api/exchange")
 public interface ExchangeClient {
     @GetMapping("/rate")
     Double getExchangeRate(
