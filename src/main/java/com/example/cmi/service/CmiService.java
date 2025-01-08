@@ -124,14 +124,25 @@ public class CmiService {
 
     public boolean assignerUtilisateur(String numeroCompte, Long utilisateurId) {
         Optional<CompteBancaire> compteOpt = compteBancaireRepository.findByNumeroCompte(numeroCompte);
+
+        CompteBancaire compte;
         if (compteOpt.isPresent()) {
-            CompteBancaire compte = compteOpt.get();
+            // Si le compte existe, l'assigner à l'utilisateur
+            compte = compteOpt.get();
             compte.setUtilisateurId(utilisateurId);
-            compteBancaireRepository.save(compte);
-            return true;
         } else {
-            throw new RuntimeException("Compte bancaire non trouvé avec l'ID : " + numeroCompte);
+            // Sinon, créer un nouveau compte bancaire
+            compte = new CompteBancaire();
+            compte.setNumeroCompte(numeroCompte);
+            compte.setUtilisateurId(utilisateurId);
+            compte.setSolde(100.0); // Valeur par défaut pour le solde
+            compte.setDevise(Devise.MAD); // Utiliser une devise par défaut, par exemple, EUR
         }
+
+        // Sauvegarder le compte (nouveau ou modifié)
+        compteBancaireRepository.save(compte);
+        return true;
     }
+
 
 }
