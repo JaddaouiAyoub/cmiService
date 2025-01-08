@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name = "portefeuilles")
 public class Portefeuilles {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -34,6 +34,7 @@ public class Portefeuilles {
 
     @ElementCollection
     @CollectionTable(name = "portefeuille_expenses", joinColumns = @JoinColumn(name = "portefeuille_id"))
+    @MapKeyColumn(name = "id")
     @Column(name = "expense_id")
     private List<Long> expensIds;
 
